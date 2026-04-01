@@ -11,19 +11,20 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --coral:       #FF7D5E;
-    --coral-soft:  rgba(255, 125, 94, 0.10);
-    --teal:        #339292;
-    --teal-soft:   rgba(51, 146, 146, 0.08);
-    --ink:         #111111;
-    --ink-soft:    #302c2a;
-    --muted:       #6f6863;
-    --bg:          #F7F5F3;
-    --card:        #FFFFFF;
-    --line:        #E7E0DC;
-    --soft:        #FBF8F6;
-    --readonly:    #ECE8E5;
-    --shadow:      0 8px 20px rgba(17,17,17,0.05);
+    --coral:         #FF7D5E;
+    --coral-soft:    rgba(255, 125, 94, 0.10);
+    --teal:          #339292;
+    --teal-soft:     rgba(51, 146, 146, 0.08);
+    --ink:           #111111;
+    --ink-soft:      #302c2a;
+    --muted:         #6f6863;
+    --bg:            #F7F5F3;
+    --card:          #FFFFFF;
+    --line:          #E7E0DC;
+    --soft:          #FBF8F6;
+    --readonly:      #ECE8E5;
+    --readonly-line: #DDD5D0;
+    --shadow:        0 8px 20px rgba(17,17,17,0.05);
   }
 
   body {
@@ -38,18 +39,18 @@
   /* ── Header ── */
   header {
     max-width: 980px;
-    margin: 36px auto 0;
+    margin: 32px auto 0;
     padding: 10px 20px 4px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 10px;
+    gap: 8px;
   }
 
   .logo {
     font-family: "Tenor Sans", "Helvetica Neue", Arial, sans-serif;
-    font-size: 30px;
+    font-size: 28px;
     line-height: 1.1;
     font-weight: 400;
     letter-spacing: 0.07em;
@@ -68,10 +69,60 @@
     line-height: 1.6;
   }
 
-  /* ── Stats bar ── */
+  /* ── Tab Bar ── */
+  .tab-bar {
+    max-width: 980px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--line);
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    padding: 11px 22px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: color .15s, border-color .15s;
+  }
+
+  .tab-btn:hover { color: var(--ink-soft); }
+
+  .tab-btn.active {
+    color: var(--coral);
+    border-bottom-color: var(--coral);
+  }
+
+  /* ── Tab Panels ── */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── Shared Container ── */
+  .container {
+    max-width: 980px;
+    margin: 20px auto;
+    padding: 0 20px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+
+  /* ════════════════════════════════════════
+     TIMELINE STYLES
+  ════════════════════════════════════════ */
+
   .stats-bar {
     max-width: 980px;
-    margin: 24px auto 0;
+    margin: 20px auto 0;
     padding: 0 20px;
     display: flex;
     gap: 12px;
@@ -90,11 +141,11 @@
     align-items: center;
     gap: 2px;
     box-shadow: var(--shadow);
-    min-width: 110px;
+    min-width: 105px;
   }
 
   .stat-num {
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 700;
     color: var(--teal);
     font-family: "Tenor Sans", sans-serif;
@@ -109,17 +160,6 @@
     color: var(--muted);
   }
 
-  /* ── Container ── */
-  .container {
-    max-width: 980px;
-    margin: 28px auto;
-    padding: 0 20px 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-
-  /* ── Stop Cards ── */
   .stop-card {
     background: var(--card);
     border-radius: 4px;
@@ -136,12 +176,10 @@
     border-color: #CFE4E4;
   }
 
-  .stop-card.rest {
-    border-top-color: #C8BEB8;
-  }
+  .stop-card.rest { border-top-color: #C8BEB8; }
 
   .stop-header {
-    padding: 14px 18px 10px;
+    padding: 13px 18px 10px;
     border-bottom: 1px solid var(--line);
     display: flex;
     align-items: flex-start;
@@ -162,17 +200,12 @@
     margin-top: 2px;
   }
 
-  .stop-card.highlight .stop-date-badge {
-    background: var(--teal);
-  }
-
-  .stop-card.rest .stop-date-badge {
-    background: #908782;
-  }
+  .stop-card.highlight .stop-date-badge { background: var(--teal); }
+  .stop-card.rest .stop-date-badge      { background: #908782; }
 
   .stop-name {
     font-family: "Tenor Sans", sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
     letter-spacing: 0.04em;
     color: var(--ink);
@@ -194,12 +227,7 @@
     gap: 10px;
   }
 
-  /* ── Metadata row ── */
-  .meta-row {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
+  .meta-row { display: flex; gap: 8px; flex-wrap: wrap; }
 
   .meta-chip {
     display: flex;
@@ -217,7 +245,6 @@
 
   .meta-chip .icon { font-size: 11px; }
 
-  /* ── Sight lists ── */
   .sight-section-label {
     font-size: 9px;
     font-weight: 700;
@@ -227,9 +254,7 @@
     margin-bottom: 5px;
   }
 
-  .sight-section-label.optional {
-    color: #908782;
-  }
+  .sight-section-label.optional { color: #908782; }
 
   .sight-list {
     list-style: none;
@@ -254,16 +279,9 @@
     font-weight: 700;
   }
 
-  .sight-list.optional li::before {
-    color: #C0B6B0;
-  }
+  .sight-list.optional li::before { color: #C0B6B0; }
 
-  .stars {
-    color: var(--coral);
-    font-size: 10px;
-    margin-left: 2px;
-    opacity: 0.8;
-  }
+  .stars { color: var(--coral); font-size: 10px; margin-left: 2px; opacity: 0.8; }
 
   .note-box {
     background: var(--teal-soft);
@@ -276,7 +294,6 @@
     line-height: 1.5;
   }
 
-  /* ── NEW tag ── */
   .new-tag {
     display: inline-block;
     background: var(--coral-soft);
@@ -292,12 +309,8 @@
     vertical-align: middle;
   }
 
-  /* ── Full-width card ── */
-  .full-width {
-    grid-column: 1 / -1;
-  }
+  .full-width { grid-column: 1 / -1; }
 
-  /* ── Section divider ── */
   .section-divider {
     grid-column: 1 / -1;
     display: flex;
@@ -306,11 +319,7 @@
     padding: 4px 0;
   }
 
-  .section-divider-line {
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-  }
+  .section-divider-line { flex: 1; height: 1px; background: var(--line); }
 
   .section-divider-label {
     font-size: 9px;
@@ -321,8 +330,243 @@
     white-space: nowrap;
   }
 
+  /* ════════════════════════════════════════
+     BUDGET STYLES
+  ════════════════════════════════════════ */
+
+  .summary-bar {
+    max-width: 980px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .summary-pill {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--coral);
+    border-radius: 4px;
+    padding: 14px 16px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+
+  .summary-pill.total {
+    border-top-color: var(--teal);
+    background: #F4FAFA;
+    border-color: #CFE4E4;
+  }
+
+  .summary-num {
+    font-family: "Tenor Sans", sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--teal);
+    letter-spacing: 0.02em;
+  }
+
+  .summary-pill:not(.total) .summary-num { color: var(--coral); }
+
+  .summary-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  .full { grid-column: 1 / -1; }
+
+  .card {
+    background: var(--card);
+    border-radius: 4px;
+    padding: 20px 22px;
+    border: 1px solid var(--line);
+    border-top: 2px solid rgba(255,125,94,0.85);
+    box-shadow: var(--shadow);
+  }
+
+  .card-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+
+  .field-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .field-row:last-child { border-bottom: none; }
+
+  .field-label {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .field-label .hint {
+    display: block;
+    font-size: 10px;
+    color: #9a918c;
+    margin-top: 1px;
+  }
+
+  .field-input-wrap { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+  .field-prefix { font-size: 12px; font-weight: 600; color: var(--muted); }
+
+  input[type="number"].field-num {
+    border: 1.5px solid var(--line);
+    background: #fbfbfb;
+    border-radius: 4px;
+    padding: 6px 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    outline: none;
+    width: 90px;
+    text-align: right;
+    transition: border-color .15s, box-shadow .15s;
+    -moz-appearance: textfield;
+  }
+
+  input[type="number"].field-num::-webkit-inner-spin-button,
+  input[type="number"].field-num::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+  input[type="number"].field-num:focus {
+    border-color: var(--teal);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(51,146,146,0.10);
+  }
+
+  .field-result {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--coral);
+    min-width: 80px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .activity-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .activity-row:last-child { border-bottom: none; }
+
+  .activity-toggle {
+    appearance: none;
+    width: 16px; height: 16px;
+    border: 2px solid var(--line);
+    border-radius: 3px;
+    background: #fbfbfb;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    transition: background .12s, border-color .12s;
+  }
+
+  .activity-toggle:checked { background: var(--teal); border-color: var(--teal); }
+
+  .activity-toggle:checked::after {
+    content: "";
+    position: absolute;
+    top: 1px; left: 4px;
+    width: 5px; height: 8px;
+    border: 2px solid white;
+    border-top: none; border-left: none;
+    transform: rotate(45deg);
+  }
+
+  .activity-label { flex: 1; font-size: 12px; color: var(--ink-soft); line-height: 1.35; }
+  .activity-label .stop-tag {
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #b0a8a4; display: block;
+  }
+  .activity-label .detail { font-size: 10px; color: #9a918c; }
+  .activity-cost { font-size: 12px; font-weight: 600; color: var(--coral); white-space: nowrap; min-width: 55px; text-align: right; }
+  .activity-row.inactive .activity-label,
+  .activity-row.inactive .activity-cost { opacity: 0.4; }
+
+  .total-card {
+    background: #F4FAFA;
+    border: 1px solid #CFE4E4;
+    border-top: 2px solid var(--teal);
+    border-radius: 4px;
+    padding: 20px 22px;
+    box-shadow: var(--shadow);
+  }
+
+  .total-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid #D8EDED;
+    font-size: 13px; color: var(--ink-soft);
+  }
+
+  .total-row:last-child { border-bottom: none; }
+  .total-row .cat-name  { font-weight: 500; }
+  .total-row .cat-amt   { font-weight: 600; color: var(--teal); }
+
+  .grand-total-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 0 4px; border-top: 2px solid var(--teal); margin-top: 4px;
+  }
+
+  .grand-label {
+    font-family: "Tenor Sans", sans-serif;
+    font-size: 14px; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--ink);
+  }
+
+  .grand-amount {
+    font-family: "Tenor Sans", sans-serif;
+    font-size: 28px; color: var(--teal); letter-spacing: 0.02em;
+  }
+
+  .per-person { font-size: 11px; color: var(--muted); text-align: right; margin-top: 4px; }
+
+  .tip-box {
+    background: var(--coral-soft);
+    border: 1px solid rgba(255,125,94,0.25);
+    border-left: 3px solid var(--coral);
+    border-radius: 3px;
+    padding: 10px 12px;
+    font-size: 11px; color: var(--ink-soft); line-height: 1.6; margin-top: 12px;
+  }
+
+  .tip-box strong { color: var(--coral); }
+
+  .btn-row { display: flex; justify-content: center; margin-top: 4px; margin-bottom: 4px; }
+
+  .reset-btn {
+    background: var(--coral); color: #fff; border: none;
+    border-radius: 4px; padding: 11px 22px;
+    font-size: 11px; font-weight: 700; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    transition: opacity .15s, transform .15s;
+    box-shadow: 0 10px 18px rgba(255,125,94,0.18);
+  }
+
+  .reset-btn:hover { opacity: .9; transform: translateY(-1px); }
+
   /* ── Footer ── */
-  .site-footer {
+  footer {
     text-align: center;
     padding: 24px 20px 28px;
     color: var(--muted);
@@ -332,26 +576,16 @@
 
   /* ── Back to top ── */
   .back-to-top {
-    position: fixed;
-    right: 18px;
-    bottom: 18px;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
+    position: fixed; right: 18px; bottom: 18px;
+    width: 46px; height: 46px; border-radius: 50%;
     border: 1px solid rgba(51,146,146,0.22);
-    background: #fff;
-    color: var(--teal);
+    background: #fff; color: var(--teal);
     box-shadow: 0 10px 20px rgba(17,17,17,0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    opacity: 0;
-    pointer-events: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0; pointer-events: none;
     transform: translateY(8px);
     transition: opacity .18s ease, transform .18s ease;
-    z-index: 30;
-    padding: 0;
+    z-index: 30; padding: 0;
   }
 
   .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
@@ -365,596 +599,365 @@
   @media (max-width: 720px) {
     .container { grid-template-columns: 1fr; }
     .full-width { grid-column: 1; }
+    .full { grid-column: 1; }
     .section-divider { grid-column: 1; }
-    .logo { font-size: 22px; }
+    .summary-bar { grid-template-columns: repeat(2, 1fr); }
+    .logo { font-size: 20px; }
+    .tab-btn { padding: 10px 14px 11px; font-size: 10px; }
   }
 </style>
 </head>
 <body>
 
+<!-- ── SHARED HEADER ── -->
 <header>
   <div class="logo">
-    <span class="star">🌟</span>&nbsp; The Fondren &nbsp;<span class="accent">Great American Adventure</span> &nbsp;<span class="star">🌟</span>
+    <span class="star">🌟</span>&nbsp; The Fondren &nbsp;<span class="accent">Great American Adventure</span>&nbsp; <span class="star">🌟</span>
   </div>
-  <div class="logo-sub">July 1 – August 1, 2026 &nbsp;·&nbsp; RV + SUV &nbsp;·&nbsp; Low-stress route &nbsp;·&nbsp; Max 5 hrs driving/day</div>
+  <div class="logo-sub">July 1 – August 1, 2026 &nbsp;·&nbsp; RV + SUV &nbsp;·&nbsp; 4 Adults · 3 Kids &nbsp;·&nbsp; Max 5 hrs/day</div>
 </header>
 
-<div class="stats-bar">
-  <div class="stat-pill">
-    <div class="stat-num">19</div>
-    <div class="stat-label">Stops</div>
-  </div>
-  <div class="stat-pill">
-    <div class="stat-num">32</div>
-    <div class="stat-label">Days</div>
-  </div>
-  <div class="stat-pill">
-    <div class="stat-num">~5,800</div>
-    <div class="stat-label">Est. Miles</div>
-  </div>
-  <div class="stat-pill">
-    <div class="stat-num">8</div>
-    <div class="stat-label">National Parks</div>
-  </div>
-  <div class="stat-pill">
-    <div class="stat-num">&lt;5 hrs</div>
-    <div class="stat-label">Max Drive/Day</div>
-  </div>
-</div>
+<!-- ── TAB BAR ── -->
+<nav class="tab-bar" style="max-width:980px;margin:20px auto 0;padding:0 20px;display:flex;border-bottom:2px solid var(--line);">
+  <button class="tab-btn active" id="btn-timeline" onclick="switchTab('timeline')">🗺&nbsp; Route &amp; Timeline</button>
+  <button class="tab-btn" id="btn-budget" onclick="switchTab('budget')">💰&nbsp; Trip Budget</button>
+</nav>
 
-<div class="container">
+<!-- ════════════════════════════════════════
+     TAB 1 — TIMELINE
+════════════════════════════════════════ -->
+<div id="tab-timeline" class="tab-panel active">
 
-  <!-- WEST COAST -->
-  <div class="section-divider">
-    <div class="section-divider-line"></div>
-    <div class="section-divider-label">West Coast</div>
-    <div class="section-divider-line"></div>
+  <div class="stats-bar">
+    <div class="stat-pill"><div class="stat-num">19</div><div class="stat-label">Stops</div></div>
+    <div class="stat-pill"><div class="stat-num">32</div><div class="stat-label">Days</div></div>
+    <div class="stat-pill"><div class="stat-num">~5,800</div><div class="stat-label">Est. Miles</div></div>
+    <div class="stat-pill"><div class="stat-num">8</div><div class="stat-label">National Parks</div></div>
+    <div class="stat-pill"><div class="stat-num">&lt;5 hrs</div><div class="stat-label">Max Drive/Day</div></div>
   </div>
 
-  <!-- Lake Tahoe -->
-  <div class="stop-card">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/1–7/2</div>
-      <div>
-        <div class="stop-name">Lake Tahoe, CA</div>
-        <div class="stop-sub">2 nights</div>
+  <div class="container">
+
+    <!-- WEST COAST -->
+    <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">West Coast</div><div class="section-divider-line"></div></div>
+
+    <div class="stop-card">
+      <div class="stop-header"><div class="stop-date-badge">7/1–7/2</div><div><div class="stop-name">Lake Tahoe, CA</div><div class="stop-sub">2 nights</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 4 hrs from Monterey</div><div class="meta-chip"><span class="icon">🌙</span> 2 nights</div></div>
+        <div><div class="sight-section-label">Must-See</div><ul class="sight-list"><li>Lake Tahoe shoreline</li><li>Sand Harbor — incredible turquoise water</li><li>Heavenly Village — easy walk, great food</li></ul></div>
+        <div><div class="sight-section-label optional">Optional</div><ul class="sight-list optional"><li>Emerald Bay — +25 min <span class="stars">★★★★★</span></li></ul></div>
       </div>
     </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 4 hrs from Monterey</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 2 nights</div>
-      </div>
-      <div>
-        <div class="sight-section-label">Must-See</div>
-        <ul class="sight-list">
-          <li>Lake Tahoe shoreline</li>
-          <li>Sand Harbor — incredible turquoise water</li>
-          <li>Heavenly Village — easy walk, great food</li>
-        </ul>
-      </div>
-      <div>
-        <div class="sight-section-label optional">Optional</div>
-        <ul class="sight-list optional">
-          <li>Emerald Bay — +25 min <span class="stars">★★★★★</span></li>
-        </ul>
+
+    <div class="stop-card highlight">
+      <div class="stop-header"><div class="stop-date-badge">7/3–7/5</div><div><div class="stop-name">Yosemite NP, CA</div><div class="stop-sub">2 nights</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 4 hr 30 min</div><div class="meta-chip"><span class="icon">🌙</span> 2 nights</div></div>
+        <div><div class="sight-section-label">Must-See</div><ul class="sight-list"><li>Yosemite Valley</li><li>Tunnel View overlook</li><li>El Capitan meadow</li><li>Yosemite Falls walk</li><li>Bridalveil Fall viewpoint</li></ul></div>
+        <div><div class="sight-section-label optional">Optional</div><ul class="sight-list optional"><li>Mariposa Grove — 0 detour <span class="stars">★★★★</span></li></ul></div>
       </div>
     </div>
+
+    <div class="stop-card rest">
+      <div class="stop-header"><div class="stop-date-badge">7/5</div><div><div class="stop-name">Las Vegas, NV</div><div class="stop-sub">Overnight reset</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 4 hr 45 min</div><div class="meta-chip"><span class="icon">🌙</span> 1 night</div></div>
+        <div class="note-box">Rest night. Cool off, grocery shop, recharge the Mach-E, refresh the RV AC.</div>
+        <div><div class="sight-section-label optional">Optional</div><ul class="sight-list optional"><li>Red Rock Canyon — +20 min <span class="stars">★★★★</span></li></ul></div>
+      </div>
+    </div>
+
+    <!-- SOUTHWEST -->
+    <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">Southwest</div><div class="section-divider-line"></div></div>
+
+    <div class="stop-card highlight">
+      <div class="stop-header"><div class="stop-date-badge">7/6–7/8</div><div><div class="stop-name">Zion NP, UT</div><div class="stop-sub">2 nights</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 2 hr 30 min</div><div class="meta-chip"><span class="icon">🌙</span> 2 nights</div></div>
+        <div><div class="sight-section-label">Must-See</div><ul class="sight-list"><li>Zion Canyon Scenic Drive</li><li>Zion-Mt. Carmel Tunnel</li><li>Canyon Overlook Trail — short, epic, family-friendly</li><li>Riverside Walk — flat, shady, kids love it</li></ul></div>
+        <div><div class="sight-section-label optional">Optional</div><ul class="sight-list optional"><li>Valley of Fire — +30 min <span class="stars">★★★★</span></li><li>Kolob Canyons — +15 min <span class="stars">★★★</span></li><li>Coral Pink Sand Dunes — +25 min <span class="stars">★★★★</span></li></ul></div>
+      </div>
+    </div>
+
+    <div class="stop-card highlight">
+      <div class="stop-header"><div class="stop-date-badge">7/8–7/10</div><div><div class="stop-name">Moab / Arches NP, UT</div><div class="stop-sub">2 nights</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 4 hr 50 min</div><div class="meta-chip"><span class="icon">🌙</span> 2 nights</div></div>
+        <div><div class="sight-section-label">Must-See</div><ul class="sight-list"><li>Delicate Arch viewpoint (or full hike if kids are up for it)</li><li>Windows Section — easy, iconic</li><li>Balanced Rock</li><li>Park Avenue viewpoint</li></ul></div>
+        <div><div class="sight-section-label optional">Optional</div><ul class="sight-list optional"><li>Canyonlands (Island in the Sky) — +20 min <span class="stars">★★★★★</span></li></ul></div>
+      </div>
+    </div>
+
+    <!-- ROCKIES -->
+    <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">The Rockies</div><div class="section-divider-line"></div></div>
+
+    <div class="stop-card">
+      <div class="stop-header"><div class="stop-date-badge">7/10–7/11</div><div><div class="stop-name">Jackson Hole / Grand Tetons, WY</div><div class="stop-sub">1 night</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 4 hr 45 min</div><div class="meta-chip"><span class="icon">🌙</span> 1 night</div></div>
+        <div><div class="sight-section-label">Must-See</div><ul class="sight-list"><li>Mormon Row barns — classic Teton photo</li><li>Jenny Lake Overlook</li><li>Snake River Overlook</li></ul></div>
+      </div>
+    </div>
+
+    <div class="stop-card highlight">
+      <div class="stop-header"><div class="stop-date-badge">7/11–7/14</div><div><div class="stop-name">Yellowstone NP, WY</div><div class="stop-sub">3 nights</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 1 hr 30 min</div><div class="meta-chip"><span class="icon">🌙</span> 3 nights</div></div>
+        <div><div class="sight-section-label">Must-See</div><ul class="sight-list"><li>Old Faithful</li><li>Grand Prismatic Spring (Midway Geyser Basin)</li><li>Norris Geyser Basin — less crowded, super cool</li><li>Lamar or Hayden Valley for wildlife</li><li>Grand Canyon of the Yellowstone (Artist Point)</li></ul></div>
+      </div>
+    </div>
+
+    <div class="stop-card rest full-width">
+      <div class="stop-header"><div class="stop-date-badge">7/14–7/15</div><div><div class="stop-name">Billings, MT</div><div class="stop-sub">Rest &amp; resupply · 1 night</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 4 hr 30 min</div><div class="meta-chip"><span class="icon">🌙</span> 1 night</div><div class="meta-chip"><span class="icon">🛑</span> Required bridge — Yellowstone → Rapid City is 5.5+ hrs without it</div></div>
+        <div class="note-box">Rest and resupply. Pictograph Cave is 10 min out if you need a stretch.</div>
+      </div>
+    </div>
+
+    <!-- GREAT PLAINS -->
+    <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">Great Plains</div><div class="section-divider-line"></div></div>
+
+    <div class="stop-card highlight">
+      <div class="stop-header"><div class="stop-date-badge">7/15–7/18</div><div><div class="stop-name">Rapid City / Badlands NP, SD</div><div class="stop-sub">3 nights</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 4 hr 45 min</div><div class="meta-chip"><span class="icon">🌙</span> 3 nights</div></div>
+        <div><div class="sight-section-label">Must-See</div><ul class="sight-list"><li>Badlands scenic loop drive</li><li>Big Badlands Overlook</li><li>Wall Drug — required Americana stop, obviously</li><li>Prairie Dog Town — kids love it</li></ul></div>
+        <div><div class="sight-section-label optional">Optional</div><ul class="sight-list optional"><li>Mount Rushmore — 0 detour <span class="stars">★★★</span></li><li>Crazy Horse — +15 min <span class="stars">★★</span></li><li>Custer State Park — +20 min <span class="stars">★★★★★</span></li><li>Wind Cave NP — +30 min <span class="stars">★★★</span></li></ul></div>
+      </div>
+    </div>
+
+    <div class="stop-card rest">
+      <div class="stop-header"><div class="stop-date-badge">7/18–7/19</div><div><div class="stop-name">Sioux Falls, SD</div><div class="stop-sub">1 night</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 4 hr 45 min</div><div class="meta-chip"><span class="icon">🌙</span> 1 night</div></div>
+        <div><div class="sight-section-label">Must-See</div><ul class="sight-list"><li>Falls Park — pretty and easy</li></ul></div>
+      </div>
+    </div>
+
+    <!-- MIDWEST -->
+    <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">Midwest</div><div class="section-divider-line"></div></div>
+
+    <div class="stop-card">
+      <div class="stop-header"><div class="stop-date-badge">7/19–7/21</div><div><div class="stop-name">Mall of America, Bloomington MN</div><div class="stop-sub">2 nights</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 3 hr 40 min</div><div class="meta-chip"><span class="icon">🌙</span> 2 nights</div></div>
+        <div><div class="sight-section-label">Must-See</div><ul class="sight-list"><li>Nickelodeon Universe — kids will riot if you skip it</li><li>Lego Imagination Center</li><li>Eat, AC, reset before the Dells</li></ul></div>
+        <div><div class="sight-section-label optional">Optional</div><ul class="sight-list optional"><li>Sea Life Aquarium — 0 detour <span class="stars">★★★</span></li></ul></div>
+      </div>
+    </div>
+
+    <div class="stop-card">
+      <div class="stop-header"><div class="stop-date-badge">7/21–7/23</div><div><div class="stop-name">Wisconsin Dells, WI <span class="new-tag">Added</span></div><div class="stop-sub">2 nights · On the way to OshKosh</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 2 hrs from MOA</div><div class="meta-chip"><span class="icon">🌙</span> 2 nights</div></div>
+        <div class="note-box">Bridge stop between MOA and OshKosh. Largest waterpark town in the US — the kids will love it.</div>
+        <div><div class="sight-section-label">Must-See</div><ul class="sight-list"><li>Noah's Ark Waterpark — largest in the US</li><li>Wisconsin Ducks boat tour — classic, genuinely fun</li><li>Downtown strip — easy walk, lots of food</li></ul></div>
+        <div><div class="sight-section-label optional">Optional</div><ul class="sight-list optional"><li>Kalahari or Great Wolf Lodge indoor waterpark <span class="stars">★★★★</span></li></ul></div>
+      </div>
+    </div>
+
+    <div class="stop-card highlight full-width">
+      <div class="stop-header"><div class="stop-date-badge">7/24–7/27</div><div><div class="stop-name">EAA AirVenture — Oshkosh, WI</div><div class="stop-sub">3 nights · Best show days: July 24–26 (Fri–Sun)</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 1 hr 30 min from Dells</div><div class="meta-chip"><span class="icon">🌙</span> 3 nights</div><div class="meta-chip"><span class="icon">✈️</span> Main event</div></div>
+        <div><div class="sight-section-label">Must-See</div><ul class="sight-list"><li>Boeing Plaza</li><li>Airshow center — midfield seating</li><li>KidVenture — the kids will LOVE this</li><li>Warbirds area</li><li>Homebuilt &amp; Vintage areas</li></ul></div>
+      </div>
+    </div>
+
+    <!-- HEADING EAST -->
+    <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">Heading East</div><div class="section-divider-line"></div></div>
+
+    <div class="stop-card">
+      <div class="stop-header"><div class="stop-date-badge">7/27–7/28</div><div><div class="stop-name">Chicago, IL</div><div class="stop-sub">1 night</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 2 hr 45 min</div><div class="meta-chip"><span class="icon">🌙</span> 1 night</div></div>
+        <div><div class="sight-section-label">Must-See</div><ul class="sight-list"><li>Millennium Park — Cloud Gate / The Bean</li><li>Navy Pier — easy, kid-friendly</li></ul></div>
+        <div><div class="sight-section-label optional">Optional</div><ul class="sight-list optional"><li>Shedd Aquarium — 0 detour <span class="stars">★★★★</span></li></ul></div>
+      </div>
+    </div>
+
+    <div class="stop-card rest">
+      <div class="stop-header"><div class="stop-date-badge">7/28–7/29</div><div><div class="stop-name">Toledo, OH</div><div class="stop-sub">Reset night · 1 night</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 4 hr 15 min</div><div class="meta-chip"><span class="icon">🌙</span> 1 night</div></div>
+        <div class="note-box">Rest night. Toledo Botanical Gardens or downtown riverfront if you need to stretch.</div>
+      </div>
+    </div>
+
+    <div class="stop-card highlight">
+      <div class="stop-header"><div class="stop-date-badge">7/29–7/31</div><div><div class="stop-name">Niagara Falls, NY</div><div class="stop-sub">2 nights</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 4 hr 30 min</div><div class="meta-chip"><span class="icon">🌙</span> 2 nights</div></div>
+        <div><div class="sight-section-label">Must-See</div><ul class="sight-list"><li>Maid of the Mist boat ride</li><li>American Falls overlook</li><li>Goat Island walk</li></ul></div>
+        <div><div class="sight-section-label optional">Optional</div><ul class="sight-list optional"><li>Cave of the Winds — 0 detour <span class="stars">★★★★★</span></li><li>Whirlpool SP — +10 min <span class="stars">★★★★</span></li></ul></div>
+      </div>
+    </div>
+
+    <div class="stop-card">
+      <div class="stop-header"><div class="stop-date-badge">7/31–8/1</div><div><div class="stop-name">Lancaster + Gettysburg, PA</div><div class="stop-sub">1 night Lancaster · Gettysburg on the way home</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 5 hrs from Niagara</div><div class="meta-chip"><span class="icon">🌙</span> 1 night</div></div>
+        <div><div class="sight-section-label">Lancaster</div><ul class="sight-list"><li>Amish farmland drive — super relaxing</li><li>Bird-in-Hand farmers market</li><li>Kitchen Kettle Village — cute, low-key</li></ul></div>
+        <div>
+          <div class="sight-section-label">Gettysburg <span style="font-size:9px;color:#908782;font-weight:400;text-transform:none;letter-spacing:0;">(45 min detour on 8/1)</span> <span class="stars" style="color:var(--coral);">★★★★★</span></div>
+          <ul class="sight-list"><li>Visitor Center Museum + Cyclorama</li><li>Auto Tour Loop</li><li>Devil's Den — kids love the rocks</li><li>Little Round Top</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop-card rest">
+      <div class="stop-header"><div class="stop-date-badge">8/1</div><div><div class="stop-name">Crofton, MD — Home</div><div class="stop-sub">1 hr 45 min from Gettysburg</div></div></div>
+      <div class="stop-body">
+        <div class="meta-row"><div class="meta-chip"><span class="icon">🚗</span> 1 hr 45 min</div><div class="meta-chip"><span class="icon">🏠</span> You made it</div></div>
+        <div class="note-box">You made it. Unpack nothing for at least 48 hours.</div>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+</div><!-- /tab-timeline -->
+
+
+<!-- ════════════════════════════════════════
+     TAB 2 — BUDGET
+════════════════════════════════════════ -->
+<div id="tab-budget" class="tab-panel">
+
+  <div class="summary-bar">
+    <div class="summary-pill"><div class="summary-num" id="s-lodging">—</div><div class="summary-label">Lodging</div></div>
+    <div class="summary-pill"><div class="summary-num" id="s-fuel">—</div><div class="summary-label">Fuel &amp; Charging</div></div>
+    <div class="summary-pill"><div class="summary-num" id="s-food">—</div><div class="summary-label">Food</div></div>
+    <div class="summary-pill total"><div class="summary-num" id="s-total">—</div><div class="summary-label">Total Est.</div></div>
   </div>
 
-  <!-- Yosemite -->
-  <div class="stop-card highlight">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/3–7/5</div>
-      <div>
-        <div class="stop-name">Yosemite NP, CA</div>
-        <div class="stop-sub">2 nights</div>
-      </div>
-    </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 4 hr 30 min</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 2 nights</div>
-      </div>
-      <div>
-        <div class="sight-section-label">Must-See</div>
-        <ul class="sight-list">
-          <li>Yosemite Valley</li>
-          <li>Tunnel View overlook</li>
-          <li>El Capitan meadow</li>
-          <li>Yosemite Falls walk</li>
-          <li>Bridalveil Fall viewpoint</li>
-        </ul>
-      </div>
-      <div>
-        <div class="sight-section-label optional">Optional</div>
-        <ul class="sight-list optional">
-          <li>Mariposa Grove — 0 detour <span class="stars">★★★★</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  <div class="container">
 
-  <!-- Las Vegas -->
-  <div class="stop-card rest">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/5</div>
-      <div>
-        <div class="stop-name">Las Vegas, NV</div>
-        <div class="stop-sub">Overnight reset</div>
+    <div class="card">
+      <div class="card-title">Lodging — RV Parks &amp; Camping</div>
+      <div class="field-row">
+        <div class="field-label">Total nights<span class="hint">32 nights (Jul 1 – Aug 1)</span></div>
+        <div class="field-input-wrap"><input type="number" class="field-num" id="nights" value="32" min="1"/></div>
+        <div class="field-result" id="r-nights">—</div>
       </div>
+      <div class="field-row">
+        <div class="field-label">RV site avg / night<span class="hint">Full hookup (30/50 amp + water + sewer)</span></div>
+        <div class="field-input-wrap"><span class="field-prefix">$</span><input type="number" class="field-num" id="rv-site" value="55" min="0"/></div>
+        <div class="field-result" id="r-rv-site">—</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Tent add-on / night<span class="hint">Most RV parks charge ~$5–15 for a tent at the same site</span></div>
+        <div class="field-input-wrap"><span class="field-prefix">$</span><input type="number" class="field-num" id="tent" value="10" min="0"/></div>
+        <div class="field-result" id="r-tent">—</div>
+      </div>
+      <div class="tip-box"><strong>Tip:</strong> KOA campgrounds (everywhere on this route) explicitly allow tent add-ons at RV sites. Book Yellowstone &amp; Yosemite <em>now</em> — they sell out months ahead.</div>
     </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 4 hr 45 min</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 1 night</div>
-      </div>
-      <div class="note-box">Rest night. Cool off, grocery shop, recharge the Mach-E, refresh the RV AC.</div>
-      <div>
-        <div class="sight-section-label optional">Optional</div>
-        <ul class="sight-list optional">
-          <li>Red Rock Canyon — +20 min <span class="stars">★★★★</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
 
-  <!-- SOUTHWEST -->
-  <div class="section-divider">
-    <div class="section-divider-line"></div>
-    <div class="section-divider-label">Southwest</div>
-    <div class="section-divider-line"></div>
-  </div>
+    <div class="card">
+      <div class="card-title">Fuel &amp; Charging</div>
+      <div class="field-row">
+        <div class="field-label">Total estimated miles<span class="hint">Both vehicles, all driving on route</span></div>
+        <div class="field-input-wrap"><input type="number" class="field-num" id="miles" value="5800" min="0"/></div>
+        <div class="field-result" id="r-miles">—</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">RV fuel economy (MPG)<span class="hint">Most gas Class A/C RVs get 7–12 mpg</span></div>
+        <div class="field-input-wrap"><input type="number" class="field-num" id="rv-mpg" value="9" min="1"/></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Gas price / gallon<span class="hint">National avg; expect higher in CA/NV</span></div>
+        <div class="field-input-wrap"><span class="field-prefix">$</span><input type="number" class="field-num" id="gas-price" value="3.50" step="0.05" min="0"/></div>
+        <div class="field-result" id="r-rv-fuel">—</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Mach-E charging cost<span class="hint">Est. ~$0.03/mile (mostly Level 2 at campsites)</span></div>
+        <div class="field-input-wrap"><span class="field-prefix">$</span><input type="number" class="field-num" id="ev-cost" value="175" min="0"/></div>
+        <div class="field-result" id="r-ev">—</div>
+      </div>
+      <div class="tip-box"><strong>Tip:</strong> Most RV parks with 30/50 amp hookups let you plug in the Mach-E — that's basically free overnight charging.</div>
+    </div>
 
-  <!-- Zion -->
-  <div class="stop-card highlight">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/6–7/8</div>
-      <div>
-        <div class="stop-name">Zion NP, UT</div>
-        <div class="stop-sub">2 nights</div>
+    <div class="card">
+      <div class="card-title">Food &amp; Groceries</div>
+      <div class="field-row">
+        <div class="field-label">Groceries / day (whole group)<span class="hint">7 people; cooking most meals in RV</span></div>
+        <div class="field-input-wrap"><span class="field-prefix">$</span><input type="number" class="field-num" id="groceries" value="60" min="0"/></div>
+        <div class="field-result" id="r-groceries">—</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Eating out / day (whole group)<span class="hint">1–2 meals out; tourism areas are pricier</span></div>
+        <div class="field-input-wrap"><span class="field-prefix">$</span><input type="number" class="field-num" id="dining" value="80" min="0"/></div>
+        <div class="field-result" id="r-dining">—</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Snacks &amp; coffee / day<span class="hint">Road trip tax is real</span></div>
+        <div class="field-input-wrap"><span class="field-prefix">$</span><input type="number" class="field-num" id="snacks" value="20" min="0"/></div>
+        <div class="field-result" id="r-snacks">—</div>
       </div>
     </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 2 hr 30 min</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 2 nights</div>
-      </div>
-      <div>
-        <div class="sight-section-label">Must-See</div>
-        <ul class="sight-list">
-          <li>Zion Canyon Scenic Drive</li>
-          <li>Zion-Mt. Carmel Tunnel</li>
-          <li>Canyon Overlook Trail — short, epic, family-friendly</li>
-          <li>Riverside Walk — flat, shady, kids love it</li>
-        </ul>
-      </div>
-      <div>
-        <div class="sight-section-label optional">Optional</div>
-        <ul class="sight-list optional">
-          <li>Valley of Fire — +30 min <span class="stars">★★★★</span></li>
-          <li>Kolob Canyons — +15 min <span class="stars">★★★</span></li>
-          <li>Coral Pink Sand Dunes — +25 min <span class="stars">★★★★</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
 
-  <!-- Moab / Arches -->
-  <div class="stop-card highlight">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/8–7/10</div>
-      <div>
-        <div class="stop-name">Moab / Arches NP, UT</div>
-        <div class="stop-sub">2 nights</div>
+    <div class="card">
+      <div class="card-title">National Park Entrance Fees</div>
+      <div class="field-row" style="padding-bottom:10px;">
+        <div class="field-label" style="font-size:11px;color:var(--teal);font-weight:600;">💡 America the Beautiful Pass — $80/vehicle covers ALL parks<span class="hint">2 passes = $160 total vs. ~$420 buying separately. No-brainer.</span></div>
       </div>
+      <div class="field-row">
+        <div class="field-label">Number of vehicles with passes</div>
+        <div class="field-input-wrap"><input type="number" class="field-num" id="passes" value="2" min="0" max="3"/></div>
+        <div class="field-result" id="r-passes">—</div>
+      </div>
+      <div class="tip-box">RV + Mach-E = 2 passes = $160. Covers Yosemite, Zion, Arches, Tetons, Yellowstone, Badlands, and more.</div>
     </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 4 hr 50 min</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 2 nights</div>
-      </div>
-      <div>
-        <div class="sight-section-label">Must-See</div>
-        <ul class="sight-list">
-          <li>Delicate Arch viewpoint (or full hike if kids are up for it)</li>
-          <li>Windows Section — easy, iconic</li>
-          <li>Balanced Rock</li>
-          <li>Park Avenue viewpoint</li>
-        </ul>
-      </div>
-      <div>
-        <div class="sight-section-label optional">Optional</div>
-        <ul class="sight-list optional">
-          <li>Canyonlands (Island in the Sky) — +20 min <span class="stars">★★★★★</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
 
-  <!-- ROCKIES -->
-  <div class="section-divider">
-    <div class="section-divider-line"></div>
-    <div class="section-divider-label">The Rockies</div>
-    <div class="section-divider-line"></div>
-  </div>
+    <div class="card full">
+      <div class="card-title">Activities &amp; Attractions</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:14px;">Check the activities you plan to do. Costs estimated for 4 adults + 3 kids. Uncheck to remove from total.</div>
+      <div id="activity-list"></div>
+    </div>
 
-  <!-- Jackson Hole -->
-  <div class="stop-card">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/10–7/11</div>
-      <div>
-        <div class="stop-name">Jackson Hole / Grand Tetons, WY</div>
-        <div class="stop-sub">1 night</div>
+    <div class="card">
+      <div class="card-title">Miscellaneous</div>
+      <div class="field-row">
+        <div class="field-label">Souvenirs &amp; gifts<span class="hint">National park merch, Wall Drug haul, etc.</span></div>
+        <div class="field-input-wrap"><span class="field-prefix">$</span><input type="number" class="field-num" id="souvenirs" value="300" min="0"/></div>
+        <div class="field-result" id="r-souvenirs">—</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">RV supplies &amp; campsite extras<span class="hint">Firewood, bug spray, propane, dump fees</span></div>
+        <div class="field-input-wrap"><span class="field-prefix">$</span><input type="number" class="field-num" id="rv-supplies" value="200" min="0"/></div>
+        <div class="field-result" id="r-rv-supplies">—</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Emergency buffer (10%)<span class="hint">Calculated automatically from total</span></div>
+        <div class="field-input-wrap" style="opacity:0.5;font-size:11px;color:var(--muted);">auto</div>
+        <div class="field-result" id="r-buffer">—</div>
       </div>
     </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 4 hr 45 min</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 1 night</div>
-      </div>
-      <div>
-        <div class="sight-section-label">Must-See</div>
-        <ul class="sight-list">
-          <li>Mormon Row barns — classic Teton photo</li>
-          <li>Jenny Lake Overlook</li>
-          <li>Snake River Overlook</li>
-        </ul>
-      </div>
-    </div>
-  </div>
 
-  <!-- Yellowstone -->
-  <div class="stop-card highlight">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/11–7/14</div>
-      <div>
-        <div class="stop-name">Yellowstone NP, WY</div>
-        <div class="stop-sub">3 nights</div>
+    <div class="total-card">
+      <div class="card-title" style="color:var(--teal);">Budget Summary</div>
+      <div class="total-row"><span class="cat-name">🏕️ Lodging</span><span class="cat-amt" id="t-lodging">—</span></div>
+      <div class="total-row"><span class="cat-name">⛽ Fuel &amp; Charging</span><span class="cat-amt" id="t-fuel">—</span></div>
+      <div class="total-row"><span class="cat-name">🍔 Food</span><span class="cat-amt" id="t-food">—</span></div>
+      <div class="total-row"><span class="cat-name">🏞️ Park Passes</span><span class="cat-amt" id="t-parks">—</span></div>
+      <div class="total-row"><span class="cat-name">🎢 Activities</span><span class="cat-amt" id="t-activities">—</span></div>
+      <div class="total-row"><span class="cat-name">🧰 Misc &amp; Buffer</span><span class="cat-amt" id="t-misc">—</span></div>
+      <div class="grand-total-row">
+        <span class="grand-label">Total Estimate</span>
+        <span class="grand-amount" id="t-grand">—</span>
       </div>
+      <div class="per-person" id="t-per-person">— per adult</div>
     </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 1 hr 30 min</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 3 nights</div>
-      </div>
-      <div>
-        <div class="sight-section-label">Must-See</div>
-        <ul class="sight-list">
-          <li>Old Faithful</li>
-          <li>Grand Prismatic Spring (Midway Geyser Basin)</li>
-          <li>Norris Geyser Basin — less crowded, super cool</li>
-          <li>Lamar or Hayden Valley for wildlife</li>
-          <li>Grand Canyon of the Yellowstone (Artist Point)</li>
-        </ul>
-      </div>
-    </div>
-  </div>
 
-  <!-- Billings -->
-  <div class="stop-card rest full-width">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/14–7/15</div>
-      <div>
-        <div class="stop-name">Billings, MT</div>
-        <div class="stop-sub">Rest &amp; resupply stop · 1 night</div>
-      </div>
+    <div class="btn-row full" style="margin-top:0;">
+      <button class="reset-btn" onclick="resetAll()">Reset to Defaults</button>
     </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 4 hr 30 min</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 1 night</div>
-        <div class="meta-chip"><span class="icon">🛑</span> Required bridge — Yellowstone → Rapid City is 5.5+ hrs without it</div>
-      </div>
-      <div class="note-box">Rest and resupply. Pictograph Cave is 10 minutes out if you need a stretch.</div>
-    </div>
-  </div>
 
-  <!-- GREAT PLAINS -->
-  <div class="section-divider">
-    <div class="section-divider-line"></div>
-    <div class="section-divider-label">Great Plains</div>
-    <div class="section-divider-line"></div>
-  </div>
+  </div><!-- /container -->
+</div><!-- /tab-budget -->
 
-  <!-- Badlands -->
-  <div class="stop-card highlight">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/15–7/18</div>
-      <div>
-        <div class="stop-name">Rapid City / Badlands NP, SD</div>
-        <div class="stop-sub">3 nights</div>
-      </div>
-    </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 4 hr 45 min</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 3 nights</div>
-      </div>
-      <div>
-        <div class="sight-section-label">Must-See</div>
-        <ul class="sight-list">
-          <li>Badlands scenic loop drive</li>
-          <li>Big Badlands Overlook</li>
-          <li>Wall Drug — required Americana stop, obviously</li>
-          <li>Prairie Dog Town — kids love it</li>
-        </ul>
-      </div>
-      <div>
-        <div class="sight-section-label optional">Optional</div>
-        <ul class="sight-list optional">
-          <li>Mount Rushmore — 0 detour <span class="stars">★★★</span></li>
-          <li>Crazy Horse — +15 min <span class="stars">★★</span></li>
-          <li>Custer State Park — +20 min <span class="stars">★★★★★</span></li>
-          <li>Wind Cave NP — +30 min <span class="stars">★★★</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Sioux Falls -->
-  <div class="stop-card rest">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/18–7/19</div>
-      <div>
-        <div class="stop-name">Sioux Falls, SD</div>
-        <div class="stop-sub">1 night</div>
-      </div>
-    </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 4 hr 45 min</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 1 night</div>
-      </div>
-      <div>
-        <div class="sight-section-label">Must-See</div>
-        <ul class="sight-list">
-          <li>Falls Park — pretty and easy</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- MIDWEST -->
-  <div class="section-divider">
-    <div class="section-divider-line"></div>
-    <div class="section-divider-label">Midwest</div>
-    <div class="section-divider-line"></div>
-  </div>
-
-  <!-- Mall of America -->
-  <div class="stop-card">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/19–7/21</div>
-      <div>
-        <div class="stop-name">Mall of America, Bloomington MN</div>
-        <div class="stop-sub">2 nights</div>
-      </div>
-    </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 3 hr 40 min</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 2 nights</div>
-      </div>
-      <div>
-        <div class="sight-section-label">Must-See</div>
-        <ul class="sight-list">
-          <li>Nickelodeon Universe — kids will riot if you skip it</li>
-          <li>Lego Imagination Center</li>
-          <li>Eat, AC, reset before the Dells</li>
-        </ul>
-      </div>
-      <div>
-        <div class="sight-section-label optional">Optional</div>
-        <ul class="sight-list optional">
-          <li>Sea Life Aquarium — 0 detour <span class="stars">★★★</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Wisconsin Dells -->
-  <div class="stop-card">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/21–7/23</div>
-      <div>
-        <div class="stop-name">Wisconsin Dells, WI <span class="new-tag">Added</span></div>
-        <div class="stop-sub">2 nights · On the way to OshKosh</div>
-      </div>
-    </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 2 hrs from MOA</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 2 nights</div>
-      </div>
-      <div class="note-box">Bridge stop between MOA and OshKosh. Largest waterpark town in the US — the kids will love it.</div>
-      <div>
-        <div class="sight-section-label">Must-See</div>
-        <ul class="sight-list">
-          <li>Noah's Ark Waterpark — largest in the US</li>
-          <li>Wisconsin Ducks boat tour — classic, genuinely fun</li>
-          <li>Downtown strip — easy walk, lots of food</li>
-        </ul>
-      </div>
-      <div>
-        <div class="sight-section-label optional">Optional</div>
-        <ul class="sight-list optional">
-          <li>Kalahari or Great Wolf Lodge indoor waterpark <span class="stars">★★★★</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- OshKosh -->
-  <div class="stop-card highlight full-width">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/24–7/27</div>
-      <div>
-        <div class="stop-name">EAA AirVenture — Oshkosh, WI</div>
-        <div class="stop-sub">3 nights · Best show days: July 24–26 (Fri–Sun)</div>
-      </div>
-    </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 1 hr 30 min from Dells</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 3 nights</div>
-        <div class="meta-chip"><span class="icon">✈️</span> Main event</div>
-      </div>
-      <div>
-        <div class="sight-section-label">Must-See</div>
-        <ul class="sight-list">
-          <li>Boeing Plaza</li>
-          <li>Airshow center — midfield seating</li>
-          <li>KidVenture — the kids will LOVE this</li>
-          <li>Warbirds area</li>
-          <li>Homebuilt &amp; Vintage areas</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- EAST -->
-  <div class="section-divider">
-    <div class="section-divider-line"></div>
-    <div class="section-divider-label">Heading East</div>
-    <div class="section-divider-line"></div>
-  </div>
-
-  <!-- Chicago -->
-  <div class="stop-card">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/27–7/28</div>
-      <div>
-        <div class="stop-name">Chicago, IL</div>
-        <div class="stop-sub">1 night</div>
-      </div>
-    </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 2 hr 45 min</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 1 night</div>
-      </div>
-      <div>
-        <div class="sight-section-label">Must-See</div>
-        <ul class="sight-list">
-          <li>Millennium Park — Cloud Gate / The Bean</li>
-          <li>Navy Pier — easy, kid-friendly</li>
-        </ul>
-      </div>
-      <div>
-        <div class="sight-section-label optional">Optional</div>
-        <ul class="sight-list optional">
-          <li>Shedd Aquarium — 0 detour <span class="stars">★★★★</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toledo -->
-  <div class="stop-card rest">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/28–7/29</div>
-      <div>
-        <div class="stop-name">Toledo, OH</div>
-        <div class="stop-sub">Reset night · 1 night</div>
-      </div>
-    </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 4 hr 15 min</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 1 night</div>
-      </div>
-      <div class="note-box">Rest night. Toledo Botanical Gardens or downtown riverfront if you need to stretch.</div>
-    </div>
-  </div>
-
-  <!-- Niagara -->
-  <div class="stop-card highlight">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/29–7/31</div>
-      <div>
-        <div class="stop-name">Niagara Falls, NY</div>
-        <div class="stop-sub">2 nights</div>
-      </div>
-    </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 4 hr 30 min</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 2 nights</div>
-      </div>
-      <div>
-        <div class="sight-section-label">Must-See</div>
-        <ul class="sight-list">
-          <li>Maid of the Mist boat ride</li>
-          <li>American Falls overlook</li>
-          <li>Goat Island walk</li>
-        </ul>
-      </div>
-      <div>
-        <div class="sight-section-label optional">Optional</div>
-        <ul class="sight-list optional">
-          <li>Cave of the Winds — 0 detour <span class="stars">★★★★★</span></li>
-          <li>Whirlpool SP — +10 min <span class="stars">★★★★</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Lancaster + Gettysburg -->
-  <div class="stop-card">
-    <div class="stop-header">
-      <div class="stop-date-badge">7/31–8/1</div>
-      <div>
-        <div class="stop-name">Lancaster + Gettysburg, PA</div>
-        <div class="stop-sub">1 night Lancaster · Gettysburg on the way home</div>
-      </div>
-    </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 5 hrs from Niagara</div>
-        <div class="meta-chip"><span class="icon">🌙</span> 1 night</div>
-      </div>
-      <div>
-        <div class="sight-section-label">Lancaster</div>
-        <ul class="sight-list">
-          <li>Amish farmland drive — super relaxing</li>
-          <li>Bird-in-Hand farmers market</li>
-          <li>Kitchen Kettle Village — cute, low-key</li>
-        </ul>
-      </div>
-      <div>
-        <div class="sight-section-label">Gettysburg <span style="font-size:9px;color:#908782;font-weight:400;text-transform:none;letter-spacing:0;">(45 min detour on 8/1)</span>&nbsp;<span class="stars" style="color:var(--coral);">★★★★★</span></div>
-        <ul class="sight-list">
-          <li>Visitor Center Museum + Cyclorama</li>
-          <li>Auto Tour Loop</li>
-          <li>Devil's Den — kids love the rocks</li>
-          <li>Little Round Top</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Home -->
-  <div class="stop-card rest">
-    <div class="stop-header">
-      <div class="stop-date-badge">8/1</div>
-      <div>
-        <div class="stop-name">Crofton, MD — Home</div>
-        <div class="stop-sub">1 hr 45 min from Gettysburg</div>
-      </div>
-    </div>
-    <div class="stop-body">
-      <div class="meta-row">
-        <div class="meta-chip"><span class="icon">🚗</span> 1 hr 45 min</div>
-        <div class="meta-chip"><span class="icon">🏠</span> You made it</div>
-      </div>
-      <div class="note-box">You made it. Unpack nothing for at least 48 hours.</div>
-    </div>
-  </div>
-
-</div>
-
-<footer class="site-footer">
+<!-- ── FOOTER ── -->
+<footer>
   The Fondren Great American Adventure &nbsp;·&nbsp; July – August 2026
 </footer>
 
@@ -963,9 +966,159 @@
 </button>
 
 <script>
-  window.addEventListener('scroll', () => {
-    document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 200);
+// ── Tab switching ──
+function switchTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  document.getElementById('btn-' + name).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Budget logic ──
+const ACTIVITIES = [
+  { id:'a-emerald',    stop:'Lake Tahoe',     name:'Emerald Bay',                detail:'Free — scenic overlook',                cost:0,   def:true  },
+  { id:'a-redrock',    stop:'Las Vegas',      name:'Red Rock Canyon',            detail:'$20/vehicle × 2 = $40',                 cost:40,  def:true  },
+  { id:'a-canyonlands',stop:'Moab',           name:'Canyonlands NP',             detail:'Covered by America the Beautiful pass', cost:0,   def:true  },
+  { id:'a-noahs',      stop:'Wisconsin Dells',name:"Noah's Ark Waterpark",       detail:'~$70/person × 7 = $490',                cost:490, def:true  },
+  { id:'a-ducks',      stop:'Wisconsin Dells',name:'Wisconsin Ducks Boat Tour',  detail:'~$30 adults · ~$20 kids',               cost:180, def:true  },
+  { id:'a-nico',       stop:'Mall of America',name:'Nickelodeon Universe',       detail:'~$40 unlimited/person × 7',             cost:280, def:true  },
+  { id:'a-sealife',    stop:'Mall of America',name:'Sea Life Aquarium',          detail:'~$28 adults · ~$22 kids',               cost:178, def:false },
+  { id:'a-eaa',        stop:'Oshkosh',        name:'EAA AirVenture (3 days)',    detail:'~$36/day adults · kids free · 2 adults',cost:216, def:true  },
+  { id:'a-rushmore',   stop:'Badlands',       name:'Mount Rushmore',             detail:'$10/vehicle parking × 2',               cost:20,  def:true  },
+  { id:'a-custer',     stop:'Badlands',       name:'Custer State Park Safari',   detail:'Scenic wildlife loop — free',           cost:0,   def:true  },
+  { id:'a-windcave',   stop:'Badlands',       name:'Wind Cave NP Tour',          detail:'~$15 adults · ~$8 kids',                cost:84,  def:false },
+  { id:'a-shedd',      stop:'Chicago',        name:'Shedd Aquarium',             detail:'~$50 adults · ~$38 kids',               cost:314, def:false },
+  { id:'a-motm',       stop:'Niagara',        name:'Maid of the Mist',           detail:'~$22 adults · ~$14 kids',               cost:130, def:true  },
+  { id:'a-cotw',       stop:'Niagara',        name:'Cave of the Winds',          detail:'~$25 adults · ~$18 kids',               cost:154, def:true  },
+  { id:'a-gettysburg', stop:'Gettysburg',     name:'Gettysburg Museum/Cyclorama',detail:'~$20 adults · ~$13 kids',               cost:119, def:true  },
+  { id:'a-kalahari',   stop:'Wisconsin Dells',name:'Kalahari Indoor Waterpark',  detail:"~$60/person × 7 (alt to Noah's Ark)",   cost:420, def:false },
+];
+
+const DEFAULTS = {
+  nights:32, 'rv-site':55, tent:10,
+  miles:5800, 'rv-mpg':9, 'gas-price':3.50, 'ev-cost':175,
+  groceries:60, dining:80, snacks:20,
+  passes:2, souvenirs:300, 'rv-supplies':200
+};
+
+function g(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  const v = parseFloat(el.value);
+  return isNaN(v) || v < 0 ? 0 : v;
+}
+
+function fmt(n)     { return '$' + Math.round(n).toLocaleString('en-US'); }
+function fmtLine(n) { return n === 0 ? '—' : '$' + Math.round(n).toLocaleString('en-US'); }
+
+function setEl(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+
+function calc() {
+  const nights  = g('nights');
+  const rvSite  = g('rv-site');
+  const tent    = g('tent');
+  const lodging = nights * (rvSite + tent);
+  setEl('r-nights',  nights + ' nights');
+  setEl('r-rv-site', fmtLine(nights * rvSite));
+  setEl('r-tent',    fmtLine(nights * tent));
+
+  const miles    = g('miles');
+  const mpg      = g('rv-mpg') || 9;
+  const gasPrice = g('gas-price');
+  const evCost   = g('ev-cost');
+  const rvFuel   = (miles / mpg) * gasPrice;
+  const fuel     = rvFuel + evCost;
+  setEl('r-miles',   miles.toLocaleString() + ' mi');
+  setEl('r-rv-fuel', fmtLine(rvFuel));
+  setEl('r-ev',      fmtLine(evCost));
+
+  const grocDay  = g('groceries');
+  const dineDay  = g('dining');
+  const snackDay = g('snacks');
+  const food     = (grocDay + dineDay + snackDay) * nights;
+  setEl('r-groceries', fmtLine(grocDay * nights));
+  setEl('r-dining',    fmtLine(dineDay * nights));
+  setEl('r-snacks',    fmtLine(snackDay * nights));
+
+  const passes   = g('passes');
+  const parkCost = passes * 80;
+  setEl('r-passes', fmtLine(parkCost));
+
+  let actTotal = 0;
+  document.querySelectorAll('.activity-toggle').forEach(cb => {
+    const row  = cb.closest('.activity-row');
+    const cost = parseFloat(cb.dataset.cost);
+    if (cb.checked) actTotal += cost;
+    row.classList.toggle('inactive', !cb.checked);
   });
+
+  const souvenirs  = g('souvenirs');
+  const rvSupplies = g('rv-supplies');
+  setEl('r-souvenirs',   fmtLine(souvenirs));
+  setEl('r-rv-supplies', fmtLine(rvSupplies));
+
+  const subtotal = lodging + fuel + food + parkCost + actTotal + souvenirs + rvSupplies;
+  const buffer   = subtotal * 0.10;
+  const grand    = subtotal + buffer;
+  setEl('r-buffer', fmtLine(buffer));
+
+  setEl('s-lodging', fmt(lodging));
+  setEl('s-fuel',    fmt(fuel));
+  setEl('s-food',    fmt(food));
+  setEl('s-total',   fmt(grand));
+  setEl('t-lodging',    fmt(lodging));
+  setEl('t-fuel',       fmt(fuel));
+  setEl('t-food',       fmt(food));
+  setEl('t-parks',      fmt(parkCost));
+  setEl('t-activities', fmt(actTotal));
+  setEl('t-misc',       fmt(souvenirs + rvSupplies + buffer));
+  setEl('t-grand',      fmt(grand));
+  setEl('t-per-person', fmt(grand / 4) + ' per adult (4 adults)');
+}
+
+function buildActivities() {
+  const list = document.getElementById('activity-list');
+  ACTIVITIES.forEach(a => {
+    const row = document.createElement('div');
+    row.className = 'activity-row';
+    row.innerHTML = `
+      <input type="checkbox" class="activity-toggle" id="${a.id}" data-cost="${a.cost}" ${a.def ? 'checked' : ''}>
+      <label class="activity-label" for="${a.id}">
+        <span class="stop-tag">${a.stop}</span>
+        ${a.name}
+        <span class="detail">${a.detail}</span>
+      </label>
+      <div class="activity-cost">${a.cost > 0 ? fmt(a.cost) : 'Free'}</div>
+    `;
+    list.appendChild(row);
+    row.querySelector('.activity-toggle').addEventListener('change', calc);
+  });
+}
+
+function resetAll() {
+  Object.entries(DEFAULTS).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val;
+  });
+  document.querySelectorAll('.activity-toggle').forEach(cb => {
+    const a = ACTIVITIES.find(x => x.id === cb.id);
+    if (a) cb.checked = a.def;
+  });
+  calc();
+}
+
+// ── Scroll to top ──
+window.addEventListener('scroll', () => {
+  document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 200);
+});
+
+buildActivities();
+document.querySelectorAll('input[type="number"]').forEach(el => el.addEventListener('input', calc));
+calc();
 </script>
 </body>
 </html>
